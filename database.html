@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Warframe Database</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #08090c;
+            color: #eee;
+        }
+
+        header {
+            background: #0d0f13;
+            border-bottom: 1px solid #252932;
+            padding: 20px;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #ff5a1f;
+        }
+
+        .back {
+            color: #aaa;
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: #ff5a1f;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: auto;
+            padding: 60px 25px;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .title small {
+            color: #ff5a1f;
+            letter-spacing: 2px;
+        }
+
+        .title h1 {
+            font-size: 50px;
+            margin: 10px 0;
+        }
+
+        .title p {
+            color: #888;
+        }
+
+        .search {
+            max-width: 650px;
+            margin: 30px auto 50px;
+            display: flex;
+            background: #111318;
+            border: 1px solid #292d35;
+        }
+
+        .search input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 18px;
+            font-size: 16px;
+        }
+
+        .search button {
+            background: #ff5a1f;
+            color: white;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .category {
+            background: #111318;
+            border: 1px solid #242830;
+            padding: 30px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .category:hover {
+            border-color: #ff5a1f;
+            transform: translateY(-4px);
+        }
+
+        .category .icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .category h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .category p {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        #results {
+            margin-top: 50px;
+        }
+
+        .result {
+            display: none;
+            background: #111318;
+            border: 1px solid #292d35;
+            padding: 25px;
+            margin-bottom: 15px;
+        }
+
+        .result h3 {
+            color: #ff6430;
+            margin-bottom: 10px;
+        }
+
+        .result p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 800px) {
+            .categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            .title h1 {
+                font-size: 38px;
+            }
+
+            .search {
+                flex-direction: column;
+            }
+
+            .search button {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <div class="logo">
+            WARFRAME<span>GUIDE</span>
+        </div>
+
+        <a class="back" href="index.html">
+            ← Ana Sayfa
+        </a>
+    </nav>
+</header>
+
+
+<main>
+
+    <div class="title">
+        <small>WARFRAME DATABASE</small>
+
+        <h1>Veritabanı</h1>
+
+        <p>
+            Warframe'deki öğeleri, kaynakları ve ekipmanları keşfet.
+        </p>
+    </div>
+
+
+    <div class="search">
+
+        <input
+            type="text"
+            id="databaseSearch"
+            placeholder="Örneğin: Neurodes, Rhino Prime, Panzer Vulpaphyla..."
+        >
+
+        <button onclick="searchDatabase()">
+            ARA
+        </button>
+
+    </div>
+
+
+    <div class="categories">
+
+        <div class="category">
+            <div class="icon">⚔️</div>
+            <h2>Warframe'ler</h2>
+            <p>Normal ve Prime Warframe'ler.</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">🔫</div>
+            <h2>Silahlar</h2>
+            <p>Primary, Secondary ve Melee silahlar.</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">🐾</div>
+            <h2>Companionlar</h2>
+            <p>Vulpaphyla, Kavat, Kubrow ve diğerleri.</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">💎</div>
+            <h2>Kaynaklar</h2>
+            <p>Oyundaki kaynakların nereden çıktığını öğren.</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">🧩</div>
+            <h2>Modlar</h2>
+            <p>Warframe ve silah modları.</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">⭐</div>
+            <h2>Prime</h2>
+            <p>Prime ekipmanlar ve parçaları.</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">🔮</div>
+            <h2>Relicler</h2>
+            <p>Void Relicleri ve içerikleri.</p>
+        </div>
+
+        <div class="category">
+            <div class="icon">🗺️</div>
+            <h2>Gezegenler</h2>
+            <p>Gezegenler, görevler ve bölgeler.</p>
+        </div>
+
+    </div>
+
+
+    <div id="results">
+
+        <div class="result" id="neurodes">
+            <h3>Neurodes</h3>
+            <p>
+                Neurodes hakkında rehber. Nereden elde edildiği,
+                hangi görevlerde bulunduğu ve crafting kullanımları.
+            </p>
+        </div>
+
+        <div class="result" id="panzer">
+            <h3>Panzer Vulpaphyla</h3>
+            <p>
+                Panzer Vulpaphyla konumu, evcilleştirme,
+                Mutagen ve Antigen bilgileri.
+            </p>
+        </div>
+
+        <div class="result" id="rhino">
+            <h3>Rhino Prime</h3>
+            <p>
+                Rhino Prime parçaları, Relicleri ve build bilgileri.
+            </p>
+        </div>
+
+    </div>
+
+</main>
+
+
+<script>
+
+function searchDatabase() {
+
+    const search = document
+        .getElementById("databaseSearch")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const results = document.querySelectorAll(".result");
+
+    results.forEach(result => {
+        result.style.display = "none";
+    });
+
+    if (search === "") {
+        return;
+    }
+
+    if (search.includes("neurodes")) {
+        document.getElementById("neurodes").style.display = "block";
+    }
+
+    else if (
+        search.includes("panzer") ||
+        search.includes("vulpaphyla")
+    ) {
+        document.getElementById("panzer").style.display = "block";
+    }
+
+    else if (
+        search.includes("rhino") ||
+        search.includes("rhino prime")
+    ) {
+        document.getElementById("rhino").style.display = "block";
+    }
+
+    else {
+        alert("Bu öğe henüz veritabanına eklenmedi.");
+    }
+}
+
+</script>
+
+</body>
+</html>
