@@ -1,0 +1,595 @@
+```html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Warframe Guide | Warframe Rehberleri</title>
+    <meta name="description" content="Warframe rehberleri, buildler, companionlar, kaynaklar ve yeni başlayanlar için detaylı bilgiler.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 80% 20%, rgba(255, 85, 0, 0.12), transparent 30%),
+                radial-gradient(circle at 20% 80%, rgba(255, 30, 0, 0.08), transparent 30%),
+                #08090c;
+            color: #eee;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+
+        header {
+            width: 100%;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(5,6,8,0.92);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+
+        .logo span {
+            color: #ff5a1f;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        nav a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        nav a:hover {
+            color: #ff6426;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 560px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: rgba(255,70,0,0.08);
+            filter: blur(100px);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 8px 14px;
+            border: 1px solid rgba(255,90,30,0.4);
+            background: rgba(255,80,20,0.08);
+            color: #ff7040;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            font-size: clamp(48px, 8vw, 92px);
+            line-height: 0.95;
+            letter-spacing: -3px;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: #ff5b1a;
+        }
+
+        .hero p {
+            color: #999;
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        /* SEARCH */
+
+        .search-box {
+            max-width: 650px;
+            margin: 40px auto 0;
+            display: flex;
+            background: #111318;
+            border: 1px solid #292d35;
+            padding: 7px;
+            transition: 0.3s;
+        }
+
+        .search-box:focus-within {
+            border-color: #ff5a1f;
+            box-shadow: 0 0 25px rgba(255,80,20,0.12);
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+        }
+
+        .search-box button {
+            border: none;
+            background: #ff5a1f;
+            color: white;
+            padding: 0 25px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .search-box button:hover {
+            background: #ff713d;
+        }
+
+        /* SECTION */
+
+        section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 70px 25px;
+        }
+
+        .section-title {
+            margin-bottom: 35px;
+        }
+
+        .section-title small {
+            color: #ff5a1f;
+            letter-spacing: 2px;
+            font-size: 11px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            margin-top: 8px;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #12151a, #0c0e12);
+            border: 1px solid #22262e;
+            padding: 28px;
+            min-height: 180px;
+            transition: 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            right: -30px;
+            bottom: -30px;
+            background: #ff5a1f;
+            opacity: 0.06;
+            border-radius: 50%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #ff5a1f;
+        }
+
+        .icon {
+            font-size: 30px;
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #888;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* POPULAR */
+
+        .guides {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .guide {
+            background: #101217;
+            border: 1px solid #242830;
+            padding: 25px;
+            transition: 0.2s;
+        }
+
+        .guide:hover {
+            border-color: #ff5a1f;
+        }
+
+        .guide-category {
+            color: #ff6430;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .guide h3 {
+            margin: 12px 0;
+            font-size: 20px;
+        }
+
+        .guide p {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .read {
+            display: inline-block;
+            margin-top: 18px;
+            color: #ff6430;
+            text-decoration: none;
+            font-size: 13px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid #20232a;
+            margin-top: 50px;
+            padding: 40px 20px;
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: #ff5a1f;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .guides {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero {
+                min-height: 500px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                letter-spacing: -2px;
+            }
+
+            .search-box {
+                flex-direction: column;
+                gap: 7px;
+            }
+
+            .search-box button {
+                padding: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav>
+        <div class="logo">WARFRAME<span>GUIDE</span></div>
+
+        <ul>
+            <li><a href="#">Ana Sayfa</a></li>
+            <li><a href="#rehberler">Rehberler</a></li>
+            <li><a href="#buildler">Buildler</a></li>
+            <li><a href="#kaynaklar">Kaynaklar</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="tag">TENNO DATABASE</div>
+
+            <h1>
+                WARFRAME<br>
+                <span>GUIDE</span>
+            </h1>
+
+            <p>
+                Warframe hakkında ihtiyacın olan her şeyi tek yerde bul.
+                Buildler, companionlar, kaynaklar ve detaylı rehberler.
+            </p>
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Bir rehber ara... Örn: Panzer Vulpaphyla"
+                >
+
+                <button onclick="searchGuide()">
+                    ARA
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- KATEGORİLER -->
+
+    <section id="rehberler">
+
+        <div class="section-title">
+            <small>KATEGORİLER</small>
+            <h2>Ne arıyorsun?</h2>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">⚔️</div>
+                <h3>Warframe Buildleri</h3>
+                <p>
+                    Warframe'ler için güçlü ve kullanışlı buildleri keşfet.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🔫</div>
+                <h3>Silah Buildleri</h3>
+                <p>
+                    Meta ve güçlü silah buildleri hakkında bilgi edin.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🐾</div>
+                <h3>Companionlar</h3>
+                <p>
+                    Vulpaphyla, Kubrow ve diğer companionları öğren.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">💎</div>
+                <h3>Kaynaklar</h3>
+                <p>
+                    Aradığın kaynakların nereden çıktığını kolayca bul.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- POPÜLER REHBERLER -->
+
+    <section id="buildler">
+
+        <div class="section-title">
+            <small>POPÜLER</small>
+            <h2>Öne Çıkan Rehberler</h2>
+        </div>
+
+        <div class="guides">
+
+            <div class="guide">
+                <div class="guide-category">COMPANION</div>
+                <h3>Panzer Vulpaphyla</h3>
+                <p>
+                    Panzer Vulpaphyla nerede bulunur?
+                    Mutagen ve antigen nasıl yapılır?
+                </p>
+                <a class="read" href="#">
+                    Rehberi Gör →
+                </a>
+            </div>
+
+            <div class="guide">
+                <div class="guide-category">RESOURCE</div>
+                <h3>Biyotik Filtre</h3>
+                <p>
+                    Biyotik Filtre nereden çıkar ve hangi
+                    crafting işlemlerinde kullanılır?
+                </p>
+                <a class="read" href="#">
+                    Rehberi Gör →
+                </a>
+            </div>
+
+            <div class="guide">
+                <div class="guide-category">BEGINNER</div>
+                <h3>Yeni Başlayanlar</h3>
+                <p>
+                    Warframe'e yeni başladıysan ilk olarak
+                    neler yapmalısın?
+                </p>
+                <a class="read" href="#">
+                    Rehberi Gör →
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- KAYNAKLAR -->
+
+    <section id="kaynaklar">
+
+        <div class="section-title">
+            <small>WARFRAME DATABASE</small>
+            <h2>Her şey tek yerde</h2>
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <div class="icon">📖</div>
+                <h3>Detaylı Rehberler</h3>
+                <p>
+                    Görevlerden companionlara kadar detaylı açıklamalar.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🔥</div>
+                <h3>Meta Buildler</h3>
+                <p>
+                    Güncel ve güçlü buildleri takip et.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🗺️</div>
+                <h3>Konumlar</h3>
+                <p>
+                    Kaynakların ve önemli eşyaların konumlarını bul.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⭐</div>
+                <h3>Prime</h3>
+                <p>
+                    Prime Warframe ve silahlar hakkında bilgi edin.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    <p>
+        © 2026 <strong>WarframeGuide</strong> — Independent fan-made guide website.
+    </p>
+</footer>
+
+
+<script>
+
+function searchGuide() {
+
+    const input = document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    if (input === "") {
+        alert("Lütfen bir rehber adı yaz.");
+        return;
+    }
+
+    if (input.includes("panzer") || input.includes("vulpaphyla")) {
+        alert("Panzer Vulpaphyla rehberini yakında ekleyeceğiz!");
+    }
+
+    else if (input.includes("biyotik") || input.includes("biotik")) {
+        alert("Biyotik Filtre rehberini yakında ekleyeceğiz!");
+    }
+
+    else {
+        alert("Bu rehber henüz eklenmedi.");
+    }
+}
+
+</script>
+
+</body>
+</html>
+```
